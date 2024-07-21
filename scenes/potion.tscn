@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://pqp5qaw561fr"]
+
+[ext_resource type="Script" path="res://scripts/potion.gd" id="1_ix6bn"]
+[ext_resource type="Texture2D" uid="uid://cyaaoryfealru" path="res://assets/sprites/potions/Icon8.png" id="2_qyjg6"]
+[ext_resource type="AudioStream" uid="uid://hxv3svfwkg67" path="res://assets/sounds/coin.wav" id="3_ag2jy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfuln"]
+radius = 2.0
+height = 12.0
+
+[node name="potion" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_ix6bn")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-07, -1.19209e-07)
+scale = Vector2(0.414063, 0.414063)
+texture = ExtResource("2_qyjg6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lfuln")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ag2jy")
+mix_target = 2
+bus = &"Music"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

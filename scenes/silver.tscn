@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqy85sfw4vel1"]
+
+[ext_resource type="Script" path="res://scripts/potion.gd" id="1_ypwc1"]
+[ext_resource type="Texture2D" uid="uid://by3rc7512n0k0" path="res://assets/sprites/silver.png" id="2_ctrqc"]
+[ext_resource type="AudioStream" uid="uid://hxv3svfwkg67" path="res://assets/sounds/coin.wav" id="3_bwlix"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egbxx"]
+size = Vector2(9, 8)
+
+[node name="silver" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_ypwc1")
+itemType = "silver"
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.525391, 0.509766)
+texture = ExtResource("2_ctrqc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_egbxx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bwlix")
+mix_target = 2
+bus = &"Music"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
